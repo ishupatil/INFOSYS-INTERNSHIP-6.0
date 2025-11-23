@@ -16,123 +16,87 @@ The architecture consists of the following layers:
    2. Data Sources
 The system integrates data from three major platforms to ensure a rich and diverse dataset:
 
-✔ Snowflake DB
+❄️✔ Snowflake DB
 
-Provides structured enterprise usage and infrastructure data.
-
+-> Provides structured enterprise usage and infrastructure data.
 Acts as a primary internal signal for Azure demand.
 
 ✔ Google Cloud Platform (GCP)
 
-Offers external cloud-usage indicators.
+-> Offers external cloud-usage indicators.
 
-Provides additional global demand signals.
+-> Provides additional global demand signals.
 
 ✔ Render API
 
-Supplies real-time consumption metrics via API calls.
-
-Enhances short-term demand prediction accuracy.
+-> Supplies real-time consumption metrics via API calls.
+-> Enhances short-term demand prediction accuracy.
 
 These sources combine internal + external drivers, creating a holistic multi-cloud demand dataset.
 
 3. Data Ingestion Layer (Azure Data Factory)
+-> Azure Data Factory (ADF) is responsible for orchestrating all ingestion activities.
 
-Azure Data Factory (ADF) is responsible for orchestrating all ingestion activities.
+🏪ADF Capabilities Used
 
-ADF Capabilities Used
+-> Automates ingestion pipelines
 
-Automates ingestion pipelines
+-> Connects securely to Snowflake, GCP, and REST API endpoints
 
-Connects securely to Snowflake, GCP, and REST API endpoints
+-> Handles data scheduling, triggers, transformations, and logging
 
-Handles data scheduling, triggers, transformations, and logging
+🏬Azure Data Lake Storage (ADLS)
 
-Azure Data Lake Storage (ADLS)
+-> Acts as the centralized raw data repository
+->Stores data in a hierarchical folder structure
+->Seamlessly integrates with Azure Databricks
+->This layer ensures scalable, secure, and fault-tolerant ingestion of multi-cloud datasets.
 
-Acts as the centralized raw data repository
-
-Stores data in a hierarchical folder structure
-
-Seamlessly integrates with Azure Databricks
-
-This layer ensures scalable, secure, and fault-tolerant ingestion of multi-cloud datasets.
 4. Data Processing Layer (Azure Databricks)
+-> Azure Databricks serves as the primary data engineering and machine learning workspace.
 
-Azure Databricks serves as the primary data engineering and machine learning workspace.
+-> Lakehouse Architecture with Medallion Layers
+🥉  ✔ Bronze Layer (Raw Data) - Stores unprocessed data exactly as ingested, Preserves full lineage and fidelity
 
-Lakehouse Architecture with Medallion Layers
-✔ Bronze Layer (Raw Data)
-
-Stores unprocessed data exactly as ingested
-
-Preserves full lineage and fidelity
-
-✔ Silver Layer (Cleaned + Enriched Data)
-
-Data cleaning (nulls, outliers, schema fixes)
+🥈✔ Silver Layer (Cleaned + Enriched Data)- Data cleaning (nulls, outliers, schema fixes)
 
 Feature engineering:
 
-Lag features
-
-Moving averages
-
-Seasonality extraction
-
-Growth rates
-
-Economic indicators
+-> Lag features ,Moving averages ,Seasonality extraction ,Growth rates ,Economic indicators
 
 Time-series normalization & alignment
 
-✔ Gold Layer (Model-Ready Data)
-
+🏅✔ Gold Layer (Model-Ready Data)
 Optimized dataset for ML training
-
 Used for dashboard and analytics consumption
-
 This Lakehouse approach ensures clean, accurate, high-quality data for forecasting.
+
 5. Machine Learning Model Training
 
 Model training is performed using Databricks ML Runtime.
-
 Models Implemented
-
 Random Forest Regressor
-
 XGBoost Regressor
-
 Prophet
-
 ARIMA (Auto-ARIMA)
 
 
 Random Forest outperformed other models due to its ability to learn complex multivariate patterns from correlated signals.
 
 Model Outputs
-
 Predicted Compute demand
-
 Predicted Storage demand
-
 Weekly & monthly demand trends
-
 Model performance metrics (MAE, RMSE, SMAPE)
+
 6. Visualization Layer (Power BI)
 
 The final forecasts are pushed to Power BI dashboards enabling:
-
 Dashboard Capabilities
-
 Real-time interactive forecasting visuals
-
 Compute & Storage demand trend analysis
-
 Regional and SKU-level breakdowns
-
 Weekly/monthly forecasting views
-
 Model performance monitoring
 
 
