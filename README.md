@@ -111,6 +111,8 @@ Model performance monitoring
 
 
  Project View Link-   https://app.powerbi.com/view?r=eyJrIjoiOGRhOTVmZDItNThhZC00MWJmLTkxNzUtYWVkYTZkNGM4NzRkIiwidCI6IjI5MTk2MTM0LTRiNzktNDY1NS1hYTZjLTAyNTc2MzQ5NGI2NCJ9
+
+
 ✔ Project Summary
 
 This system provides a fully automated forecasting pipeline from data ingestion → cleaning → feature engineering → ML training → dashboard reporting. It supports Azure’s enterprise-level capacity planning with highly accurate demand predictions.
