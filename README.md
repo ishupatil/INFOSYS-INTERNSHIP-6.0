@@ -100,9 +100,7 @@ Weekly/monthly forecasting views
 Model performance monitoring
 
 
-DEMO VIDEO-  https://github.com/ishupatil/INFOSYS-INTERNSHIP-6.0/blob/main/Demo_video/Azure-Based%20Demand%20Forecasting%20and%20Capacity%20Optimization%20Project%20Overview.mp4
-
-
+DEMO VIDEO-  https://github.com/user-attachments/assets/a45426a3-4513-4d36-9f6a-ddd934574a8b
 
 
  Dashboard Results:-  ![d1](https://github.com/user-attachments/assets/ae327a4f-c052-4d90-8889-1ac68d5bc211)
