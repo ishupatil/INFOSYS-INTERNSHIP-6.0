@@ -3,79 +3,150 @@ This is the project file of Azure Based Demand Forecasting &amp; Capacity Optimi
 
 Architecture of the project:-
 ![WhatsApp Image 2025-11-22 at 18 16 06_f9e224ed](https://github.com/user-attachments/assets/dbcd8f3c-8f32-4f86-ab04-87857cf29b64)
-This project implements an end-to-end cloud-based forecasting system designed to predict Azure Compute and Storage demand. The workflow integrates multi-cloud data ingestion, scalable storage, advanced feature engineering, machine learning model training, and Power BI–based visualization to support Azure’s capacity planning and supply chain decision-making. image
+This project implements an end-to-end cloud-based forecasting system designed to predict Azure Compute and Storage demand. It integrates multi-cloud data ingestion, scalable storage, advanced feature engineering, machine learning model training, and interactive Power BI dashboards to support Azure’s capacity planning and supply chain decision-making.
+1. System Architecture
 
-1. Data Sources
+(Image: “WhatsApp Image 2025-11-22 at 18 16 06_f9e224ed”)
+The architecture consists of the following layers:
 
-The solution brings together data from three major platforms:
+1) Data Sources
+2) Data Ingestion Layer (ADF)
+3) Data Lake & Processing Layer (ADLS + Databricks)
+4) ML Model Training Layer
+5) Visualization Layer (Power BI)
+   2. Data Sources
 
-Snowflake DB – provides structured enterprise usage and infrastructure data.
-Google Cloud Platform (GCP) – supplies external cloud usage signals and demand indicators.
-Render API – provides API-level real-time consumption metrics. These diverse sources create a rich dataset combining internal and external demand drivers.
-image
-2. Data Ingestion Layer
+The system integrates data from three major platforms to ensure a rich and diverse dataset:
 
-All incoming data is ingested through:
+✔ Snowflake DB
 
-✔ Azure Data Factory (ADF)
+Provides structured enterprise usage and infrastructure data.
 
-Automates ingestion workflows
-Connects securely to Snowflake, GCP, and API endpoints
-Handles scheduling, pipelines, and logging
-✔ Azure Data Lake Storage (ADLS)
+Acts as a primary internal signal for Azure demand.
 
-Acts as the centralized raw data storage location
-Stores data in hierarchical folders for easy integration with Databricks This ensures scalable, fault-tolerant data handling capable of growing with Azure’s infrastructure signals.
-image
-3. Data Processing Layer (Azure Databricks)
+✔ Google Cloud Platform (GCP)
 
-Azure Databricks is the core data processing and ML environment in this architecture.
+Offers external cloud-usage indicators.
 
+Provides additional global demand signals.
+
+✔ Render API
+
+Supplies real-time consumption metrics via API calls.
+
+Enhances short-term demand prediction accuracy.
+
+These sources combine internal + external drivers, creating a holistic multi-cloud demand dataset.
+
+3. Data Ingestion Layer (Azure Data Factory)
+
+Azure Data Factory (ADF) is responsible for orchestrating all ingestion activities.
+
+ADF Capabilities Used
+
+Automates ingestion pipelines
+
+Connects securely to Snowflake, GCP, and REST API endpoints
+
+Handles data scheduling, triggers, transformations, and logging
+
+Azure Data Lake Storage (ADLS)
+
+Acts as the centralized raw data repository
+
+Stores data in a hierarchical folder structure
+
+Seamlessly integrates with Azure Databricks
+
+This layer ensures scalable, secure, and fault-tolerant ingestion of multi-cloud datasets.
+4. Data Processing Layer (Azure Databricks)
+
+Azure Databricks serves as the primary data engineering and machine learning workspace.
+
+Lakehouse Architecture with Medallion Layers
 ✔ Bronze Layer (Raw Data)
 
-Stores unprocessed data exactly as received
-Maintains full data lineage and fidelity
-✔ Silver Layer (Clean + Enriched Data)
+Stores unprocessed data exactly as ingested
 
-Data cleaning applied
-Feature engineering performed (lags, moving averages, seasonality, growth, economic indicators, etc.)
-Time-series alignment and normalization
+Preserves full lineage and fidelity
+
+✔ Silver Layer (Cleaned + Enriched Data)
+
+Data cleaning (nulls, outliers, schema fixes)
+
+Feature engineering:
+
+Lag features
+
+Moving averages
+
+Seasonality extraction
+
+Growth rates
+
+Economic indicators
+
+Time-series normalization & alignment
+
 ✔ Gold Layer (Model-Ready Data)
 
-Final curated dataset
-Used for machine learning and dashboard consumption
-This multi-layered Lakehouse approach ensures clean, high-quality, reliable input for modeling.
+Optimized dataset for ML training
 
-image
-4. Machine Learning Model Training
+Used for dashboard and analytics consumption
 
-The Model Training block uses Databricks ML runtime to build multiple forecasting models:
+This Lakehouse approach ensures clean, accurate, high-quality data for forecasting.
+5. Machine Learning Model Training
 
-Random Forest
+Model training is performed using Databricks ML Runtime.
+
+Models Implemented
+
+Random Forest Regressor
+
 XGBoost Regressor
+
 Prophet
+
 ARIMA (Auto-ARIMA)
-Each model is trained on engineered features from the Silver/Gold layers.
 
-Model Accuracy- Random Forest: 97.69% (Best), XGBoost: 97.47%, ARIMA: 84.2%, Prophet: 84.19%
+Each model is trained on engineered time-series signals from the Silver/Gold layers.
 
-Random Forest performed the best due to its ability to learn complex patterns from multiple correlated signals.
+Model Performance
+Model	Accuracy
+Random Forest	⭐ 97.69% (Best)
+XGBoost	97.47%
+ARIMA	84.2%
+Prophet	84.19%
 
-The final outputs include:
+Random Forest outperformed other models due to its ability to learn complex multivariate patterns from correlated signals.
+
+Model Outputs
 
 Predicted Compute demand
+
 Predicted Storage demand
-Weekly and monthly trend insights
+
+Weekly & monthly demand trends
+
 Model performance metrics (MAE, RMSE, SMAPE)
-5. Visualization Layer (Power BI)
+6. Visualization Layer (Power BI)
 
-The final forecasts and performance metrics are published to Power BI, enabling:
+The final forecasts are pushed to Power BI dashboards enabling:
 
-Real-time interactive dashboards
-Demand trend reports
-Regional and service-level breakdowns
-Capacity planning insights
-Model accuracy monitoring
+Dashboard Capabilities
+
+Real-time interactive forecasting visuals
+
+Compute & Storage demand trend analysis
+
+Regional and SKU-level breakdowns
+
+Weekly/monthly forecasting views
+
+Model performance monitoring
+
+
+
 
  Dashboard Results:-  ![d1](https://github.com/user-attachments/assets/ae327a4f-c052-4d90-8889-1ac68d5bc211)
                       ![d2](https://github.com/user-attachments/assets/df5008db-60fb-43dc-b9fd-91d6567d67cf)
@@ -86,7 +157,8 @@ Model accuracy monitoring
 
 
  Project View Link-   https://app.powerbi.com/view?r=eyJrIjoiOGRhOTVmZDItNThhZC00MWJmLTkxNzUtYWVkYTZkNGM4NzRkIiwidCI6IjI5MTk2MTM0LTRiNzktNDY1NS1hYTZjLTAyNTc2MzQ5NGI2NCJ9
- 
+✔ Project Summary
 
+This system provides a fully automated forecasting pipeline from data ingestion → cleaning → feature engineering → ML training → dashboard reporting. It supports Azure’s enterprise-level capacity planning with highly accurate demand predictions.
 
 
