@@ -1,5 +1,4 @@
 # INFOSYS-INTERNSHIP-6.0
-This is the project file of Azure Based Demand Forecasting &amp; Capacity Optimization System of Infosys 6.0 internship.
 
 Architecture of the project:-
 ![WhatsApp Image 2025-11-22 at 18 16 06_f9e224ed](https://github.com/user-attachments/assets/dbcd8f3c-8f32-4f86-ab04-87857cf29b64)
@@ -15,7 +14,6 @@ The architecture consists of the following layers:
 4) ML Model Training Layer
 5) Visualization Layer (Power BI)
    2. Data Sources
-
 The system integrates data from three major platforms to ensure a rich and diverse dataset:
 
 ✔ Snowflake DB
@@ -109,14 +107,6 @@ Prophet
 
 ARIMA (Auto-ARIMA)
 
-Each model is trained on engineered time-series signals from the Silver/Gold layers.
-
-Model Performance
-Model	Accuracy
-Random Forest	⭐ 97.69% (Best)
-XGBoost	97.47%
-ARIMA	84.2%
-Prophet	84.19%
 
 Random Forest outperformed other models due to its ability to learn complex multivariate patterns from correlated signals.
 
